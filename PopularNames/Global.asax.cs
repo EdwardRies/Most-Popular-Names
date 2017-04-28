@@ -6,11 +6,15 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using PopularNames.Models;
+using PopularNames.Utilities;
 
 namespace PopularNames
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        public static List<Entry> Data { get; set; }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -18,6 +22,8 @@ namespace PopularNames
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Data = CsvImport.GetData();
         }
     }
 }
